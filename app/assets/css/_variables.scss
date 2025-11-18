@@ -9,16 +9,16 @@
   --text-muted: #6b7280;
   --primary: var(--highlight-pink);
   --accent: var(--highlight-pink);
-  --border: rgba(2,4,32,0.16);
-  --border-strong: rgba(2,4,32,0.22);
-  /* 导航容器外轮廓 */
-  --border-outer: rgba(2,4,32,0.08);
+  --border: rgba(2,4,32,0.20);
+  --border-strong: rgba(2,4,32,0.30);
+  /* 导航容器外轮廓 - 增强对比度 */
+  --border-outer: rgba(2,4,32,0.12);
   --nav-pressed: var(--accent);
   /* 选中时的高亮色（粉色） */
   --highlight-pink: #ff5fa2;
   --highlight-pink-rgb: 255,95,162;
   --primary-rgb: 255,95,162;
-  --glass: rgba(255,255,255,0.92);
+  --glass: rgba(255,255,255,0.95);
 }
 
 /* Dark theme - 由 html[data-theme='dark'] 应用 */
@@ -28,13 +28,13 @@ html[data-theme='dark'] {
   --text-primary: #f7f9fb;
   --text-muted: #4b535f;
   --primary: var(--highlight-pink);
-  --border: rgba(255,255,255,0.16);
-  --border-strong: rgba(255,255,255,0.22);
-  --border-outer: rgba(255,255,255,0.08);
-  --nav-pressed: rgba(255,95,162,0.20);
+  --border: rgba(255,255,255,0.20);
+  --border-strong: rgba(255,255,255,0.30);
+  --border-outer: rgba(255,255,255,0.12);
+  --nav-pressed: rgba(255,95,162,0.30);
   --highlight-pink: #ff5fa2;
   --highlight-pink-rgb: 255,95,162;
   --accent: var(--highlight-pink);
   --primary-rgb: 255,95,162;
-  --glass: rgba(8,12,20,0.6);
+  --glass: rgba(8,12,20,0.75);
 }

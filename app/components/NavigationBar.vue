@@ -42,8 +42,11 @@ const iconName = computed(() => {
   gap: 12px;
   align-items: center;
   border-radius: 36px;
-  backdrop-filter: blur(6px) saturate(120%);
-  border: 1px solid var(--border-outer);
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1.5px solid var(--border-outer);
+  background: var(--glass);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
 .nav-btn {
@@ -53,38 +56,81 @@ const iconName = computed(() => {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text-primary);
   text-decoration: none;
-  transition: border-color 160ms ease, transform 120ms ease;
+  transition: all 0.2s ease;
   border: none;
   position: relative;
+  cursor: pointer;
 }
 
 .nav-btn::before {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: 999px;
-  border: 1.25px solid var(--border);
+  border: 2px solid var(--border);
   pointer-events: none;
-  transition: border-color 160ms ease;
+  transition: all 0.2s ease;
+  opacity: 0.8;
 }
 
-.icon { width: 20px; height: 20px; }
+.icon { 
+  width: 20px; 
+  height: 20px;
+}
 
-.nav-btn[aria-pressed="true"]::before { border-color: var(--nav-pressed); }
-.nav-btn.router-link-active::before { border-color: var(--highlight-pink); }
-.nav-btn:hover::before, .nav-btn:focus::before, .nav-btn:active::before { border-color: var(--border); }
+.nav-btn[aria-pressed="true"]::before { 
+  border-color: var(--highlight-pink);
+  opacity: 1;
+}
+
+.nav-btn.router-link-active::before { 
+  border-color: var(--highlight-pink);
+  opacity: 1;
+}
+
+.nav-btn:hover::before, .nav-btn:focus::before { 
+  border-color: var(--border-strong);
+  opacity: 1;
+}
+
+.nav-btn:active::before {
+  border-color: var(--highlight-pink);
+  opacity: 1;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 
 @media (prefers-color-scheme: dark) {
-  .nav-inner { border-color: var(--border-outer); }
+  .nav-inner { 
+    border-color: var(--border-outer);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
   .nav-btn::before { border-color: var(--border); }
-  .nav-btn:hover::before, .nav-btn:focus::before, .nav-btn:active::before { border-color: var(--border-strong); }
+  .nav-btn:hover::before, .nav-btn:focus::before { border-color: var(--border-strong); }
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
 
 @media (max-width: 768px) {
   .nav-pill { left: 50%; top: auto; bottom: 20px; transform: translateX(-50%); }
-  .nav-inner { width: auto; padding: 10px 14px; border-radius: 24px; flex-direction: row; gap: 10px; }
+  .nav-inner { 
+    width: auto; 
+    padding: 10px 14px; 
+    border-radius: 24px; 
+    flex-direction: row; 
+    gap: 10px;
+    backdrop-filter: blur(12px) saturate(150%);
+  }
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .icon { width: 18px; height: 18px; }
 }
 </style>

@@ -1,31 +1,37 @@
-<template>
-  <nav class="nav-pill" role="navigation" aria-label="侧边导航栏">
-    <div class="nav-inner glass">
-      <NuxtLink to="/" class="nav-btn" title="首页" aria-label="返回首页">
-        <Icon name="mdi:home" class="icon" />
-      </NuxtLink>
-      <NuxtLink to="/about" class="nav-btn" title="关于" aria-label="关于页面">
-        <Icon name="mdi:information" class="icon" />
-      </NuxtLink>
-      <button class="nav-btn" :aria-pressed="colorMode.mode.value !== 'system'" @click="colorMode.toggleMode()" :title="`主题：${colorMode.mode.value}`">
-        <Icon :name="iconName" class="icon" />
-      </button>
-    </div>
-  </nav>
-</template>
-
-<script setup>
-import { computed } from 'vue'
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import { useColorMode } from '../composables/useColorMode'
 
 const colorMode = useColorMode()
 const iconName = computed(() => {
-  const v = colorMode.mode.value
-  return v === 'system' ? 'mdi:theme-light-dark' : v === 'light' ? 'mdi:weather-sunny' : 'mdi:weather-night'
+	const v = colorMode.mode.value
+	return v === 'system' ? 'ri:contrast-2-line' : v === 'light' ? 'ri:sun-line' : 'ri:moon-line'
+})
+
+// 避免SSR水合不匹配
+const isMounted = ref(false)
+onMounted(() => {
+	isMounted.value = true
 })
 </script>
 
-<style scoped>
+<template>
+<nav class="nav-pill" role="navigation" aria-label="侧边导航栏">
+	<div class="nav-inner glass">
+		<NuxtLink to="/" class="nav-btn" title="首页" aria-label="返回首页">
+			<Icon name="ri:home-4-line" class="icon" />
+		</NuxtLink>
+		<NuxtLink to="/about" class="nav-btn" title="关于" aria-label="关于页面">
+			<Icon name="ri:information-line" class="icon" />
+		</NuxtLink>
+		<button class="nav-btn" :aria-pressed="isMounted && colorMode.mode.value !== 'system'" :title="isMounted ? `主题：${colorMode.mode.value}` : '主题：system'" @click="colorMode.toggleMode()">
+			<Icon :name="isMounted ? iconName : 'ri:contrast-2-line'" class="icon" />
+		</button>
+	</div>
+</nav>
+</template>
+
+<style scoped lang="scss">
 .nav-pill {
   position: fixed;
   left: 20px;
@@ -76,22 +82,22 @@ const iconName = computed(() => {
   opacity: 0.8;
 }
 
-.icon { 
-  width: 20px; 
+.icon {
+  width: 20px;
   height: 20px;
 }
 
-.nav-btn[aria-pressed="true"]::before { 
+.nav-btn[aria-pressed="true"]::before {
   border-color: var(--highlight-pink);
   opacity: 1;
 }
 
-.nav-btn.router-link-active::before { 
+.nav-btn.router-link-active::before {
   border-color: var(--highlight-pink);
   opacity: 1;
 }
 
-.nav-btn:hover::before, .nav-btn:focus::before { 
+.nav-btn:hover::before, .nav-btn:focus::before {
   border-color: var(--border-strong);
   opacity: 1;
 }
@@ -106,7 +112,7 @@ const iconName = computed(() => {
 }
 
 @media (prefers-color-scheme: dark) {
-  .nav-inner { 
+  .nav-inner {
     border-color: var(--border-outer);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
@@ -119,11 +125,11 @@ const iconName = computed(() => {
 
 @media (max-width: 768px) {
   .nav-pill { left: 50%; top: auto; bottom: 20px; transform: translateX(-50%); }
-  .nav-inner { 
-    width: auto; 
-    padding: 10px 14px; 
-    border-radius: 24px; 
-    flex-direction: row; 
+  .nav-inner {
+    width: auto;
+    padding: 10px 14px;
+    border-radius: 24px;
+    flex-direction: row;
     gap: 10px;
     backdrop-filter: blur(12px) saturate(150%);
   }

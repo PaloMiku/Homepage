@@ -10,7 +10,7 @@ const appConfig = useAppConfig()
 				Hi, I'm <span class="hero-name">PaloMiku</span> <span class="wave">👋</span>
 			</h1>
 			<h2 class="hero-title">
-				A NodeJS Full Stack <span class="developer">&lt;Developer /&gt;</span>
+				A Student Nodejs <span class="developer">&lt;Developer /&gt;</span>
 			</h2>
 			<p class="hero-sub">
 				An independent developer coding with love.

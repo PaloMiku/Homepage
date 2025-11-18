@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useColorMode } from '../composables/useColorMode'
+import { useAppConfig } from '#app'
 
 const colorMode = useColorMode()
+const appConfig = useAppConfig()
+
+const navItems = computed(() => appConfig.navigation || [])
+
 const iconName = computed(() => {
 	const v = colorMode.mode.value
 	return v === 'system' ? 'ri:contrast-2-line' : v === 'light' ? 'ri:sun-line' : 'ri:moon-line'
@@ -18,11 +23,8 @@ onMounted(() => {
 <template>
 <nav class="nav-pill" role="navigation" aria-label="侧边导航栏">
 	<div class="nav-inner glass">
-		<NuxtLink to="/" class="nav-btn" title="首页" aria-label="返回首页">
-			<Icon name="ri:home-4-line" class="icon" />
-		</NuxtLink>
-		<NuxtLink to="/about" class="nav-btn" title="关于" aria-label="关于页面">
-			<Icon name="ri:information-line" class="icon" />
+		<NuxtLink v-for="item in navItems" :key="item.to" :to="item.to" class="nav-btn" :title="item.title" :aria-label="item.label">
+			<Icon :name="item.icon" class="icon" />
 		</NuxtLink>
 		<button class="nav-btn" :aria-pressed="isMounted && colorMode.mode.value !== 'system'" :title="isMounted ? `主题：${colorMode.mode.value}` : '主题：system'" @click="colorMode.toggleMode()">
 			<Icon :name="isMounted ? iconName : 'ri:contrast-2-line'" class="icon" />

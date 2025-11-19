@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import { useAppConfig } from '#app'
 import { computed, onMounted, ref } from 'vue'
 import { useColorMode } from '../composables/useColorMode'
-import { useAppConfig } from '#app'
 
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
 
 const navItems = computed(() => appConfig.navigation || [])
 
+/**
+ * 根据当前颜色模式返回对应的图标名称
+ *
+ * @returns {string} 图标名称字符串
+ * - 当颜色模式为'system'时返回'ri:contrast-2-line'
+ * - 当颜色模式为'light'时返回'ri:sun-line'
+ * - 其他情况返回'ri:moon-line'
+ */
 const iconName = computed(() => {
 	const v = colorMode.mode.value
 	return v === 'system' ? 'ri:contrast-2-line' : v === 'light' ? 'ri:sun-line' : 'ri:moon-line'

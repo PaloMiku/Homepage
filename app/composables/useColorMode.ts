@@ -6,13 +6,10 @@ export type ColorMode = 'light' | 'dark' | 'system'
 const STORAGE_KEY = 'pref-color-mode'
 
 export function useColorMode() {
-	// 客户端优先读取 localStorage；服务端则返回 'system' 作为默认
-	// 在 Nuxt 中使用 useState 保证成应用级的共享状态
 	const state = useState<ColorMode>('color-mode', () => 'system')
 	const mode = state as Ref<ColorMode>
 	const isMounted = ref(false)
 
-	// 在客户端优先读取 localStorage 的偏好
 	if (typeof window !== 'undefined') {
 		const stored = localStorage.getItem(STORAGE_KEY)
 		if (stored === 'light' || stored === 'dark' || stored === 'system') {

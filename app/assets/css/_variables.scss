@@ -18,6 +18,12 @@
   --highlight-pink: #ff5fa2;
   --highlight-pink-rgb: 255,95,162;
   --primary-rgb: 255,95,162;
+  /* GitHub-like heatmap colors */
+  --heatmap-0: #ebedf0;
+  --heatmap-1: #9be9a8;
+  --heatmap-2: #40c463;
+  --heatmap-3: #30a14e;
+  --heatmap-4: #216e39;
   --glass: rgba(255,255,255,0.95);
 }
 
@@ -37,4 +43,10 @@ html[data-theme='dark'] {
   --accent: var(--highlight-pink);
   --primary-rgb: 255,95,162;
   --glass: rgba(8,12,20,0.75);
+  /* GitHub-like heatmap colors for dark */
+  --heatmap-0: #161b22;
+  --heatmap-1: #0e4429;
+  --heatmap-2: #006d32;
+  --heatmap-3: #26a641;
+  --heatmap-4: #39d353;
 }
